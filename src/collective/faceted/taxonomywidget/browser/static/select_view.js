@@ -2,7 +2,6 @@ Faceted.TaxonomySelectWidget = Faceted.SelectWidget
 Faceted.TaxonomySelectWidget.prototype = Object.create(Faceted.SelectWidget.prototype)
 
 Faceted.TaxonomySelectWidget.prototype.count_update = function(data, sortcountable){
-    console.log(this);
     var context = this;
     var select = jQuery('select', context.widget);
     var options = jQuery('option', context.widget);
