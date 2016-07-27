@@ -5,6 +5,9 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Fix the selected attribute.
+  [mpeeters]
+
 - Fix an issue with nested optgroup.
   [mpeeters]
 

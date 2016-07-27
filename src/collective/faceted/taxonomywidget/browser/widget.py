@@ -117,10 +117,13 @@ class TaxonomyElement(object):
         return u''.join(html)
 
     def render_option(self, default_value):
-        html = (u'<option selected="{selected}" value="{id}" title="{label}" '
+        html = (u'<option {selected} value="{id}" title="{label}" '
                 u'class="{css_class}">{label}</option>')
+        selected = ''
+        if self.id == default_value:
+            selected = u'selected="selected"'
         return html.format(
-            selected=self.id == default_value,
+            selected=selected,
             id=self.id,
             label=self.label,
             css_class=self.css_class,
