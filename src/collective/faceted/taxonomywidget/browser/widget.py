@@ -49,16 +49,10 @@ class Taxonomy(object):
             self._last_level = element.level
 
         if element.level > self._last_level:
-            if len(self._parents) < self._last_level:
-                self._parents.append(None)
-            parent = self._items[-1]
-            self._parents[self._last_level - 1] = parent
-            element.define_parent(parent)
-        elif element.level == self._last_level:
-            element.define_parent(self._parents[element.level - 2])
+            self._parents.append(self._items[-1])
         elif element.level < self._last_level:
-            if element.level > 1:
-                element.define_parent(self._parents[element.level - 2])
+            self._parents = self._parents[:element.level]
+        element.define_parent(self._parents[-1])
 
         self._items.append(element)
         self._last_level = element.level
@@ -90,6 +84,7 @@ class TaxonomyElement(object):
     def css_class(self):
         css = [u'taxonomy-level-{0}'.format(self.level)]
         if self.has_child is True:
+            css.append(u'taxonomy-meta-level-{0}'.format(self.level))
             css.append(u'meta')
         return u' '.join(css)
 
@@ -113,10 +108,10 @@ class TaxonomyElement(object):
                 css=u'group-level-{0}'.format(self.level),
                 label=self.label,
             ))
+            html.append(u'</optgroup>')
             html.append(self.render_option(default_value))
             for child in self.childs:
                 html.append(child.render(default_value))
-            html.append(u'</optgroup>')
         else:
             html.append(self.render_option(default_value))
         return u''.join(html)
