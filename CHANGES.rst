@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a3 (unreleased)
+1.0a3 (2016-08-02)
 ------------------
 
 - Add a taxonomy select2 widget.
