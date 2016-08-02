@@ -5,7 +5,8 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add a taxonomy select2 widget.
+  [mpeeters]
 
 
 1.0a2 (2016-07-27)
