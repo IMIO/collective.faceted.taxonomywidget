@@ -22,7 +22,10 @@ class SelectWidget(widget.Widget):
         '++resource++eea.facetednavigation.widgets.select.view.js',
         '++resource++collective.faceted.taxonomywidget.widgets.select.view.js',
     )
-    edit_js = '++resource++eea.facetednavigation.widgets.select.edit.js'
+    edit_js = (
+        '++resource++eea.facetednavigation.widgets.select.edit.js',
+        '++resource++collective.faceted.taxonomywidget.widgets.select.edit.js',
+    )
     view_css = '++resource++collective.faceted.taxonomywidget.widgets.select.view.css'
 
     def taxonomy(self):
@@ -35,10 +38,38 @@ class SelectWidget(widget.Widget):
         return taxonomy
 
 
+class Select2Widget(SelectWidget):
+    widget_type = 'taxonomy_select2'
+    widget_label = _('Taxonomy Select2')
+
+    view_js = (
+        '++resource++eea.facetednavigation.widgets.select.view.js',
+        '++resource++collective.faceted.taxonomywidget.widgets.select2.view.js',
+    )
+    edit_js = (
+        '++resource++eea.facetednavigation.widgets.select.edit.js',
+        '++resource++collective.faceted.taxonomywidget.widgets.select2.edit.js',
+    )
+    view_css = (
+        '++resource++collective.faceted.taxonomywidget.widgets.select.view.css',
+        '++resource++collective.faceted.taxonomywidget.widgets.select2.view.css',
+    )
+
+    def taxonomy(self):
+        taxonomy = Taxonomy(default_value=self.default or '', groups=True)
+        for term in self.vocabulary():
+            taxonomy.add_term(
+                term[0],
+                self.translate(term[1]),
+            )
+        return taxonomy
+
+
 class Taxonomy(object):
 
-    def __init__(self, default_value):
+    def __init__(self, default_value, groups=False):
         self.default_value = default_value
+        self.groups = groups
         self._items = []
         self._parents = [None]
         self._last_level = None
@@ -60,7 +91,7 @@ class Taxonomy(object):
     def render(self):
         html = []
         for element in [e for e in self._items if e.level == 1]:
-            html.append(element.render(self.default_value))
+            html.append(element.render(self.default_value, groups=self.groups))
         return u''.join(html)
 
 
@@ -100,7 +131,7 @@ class TaxonomyElement(object):
     def has_child(self):
         return len(self.childs) > 0
 
-    def render(self, default_value):
+    def render(self, default_value, groups=False):
         html = []
         if self.has_child is True:
             group = u'<optgroup label="{label}" class="{css} taxonomy-group">'
@@ -108,10 +139,13 @@ class TaxonomyElement(object):
                 css=u'group-level-{0}'.format(self.level),
                 label=self.label,
             ))
-            html.append(u'</optgroup>')
+            if groups is False:
+                html.append(u'</optgroup>')
             html.append(self.render_option(default_value))
             for child in self.childs:
-                html.append(child.render(default_value))
+                html.append(child.render(default_value, groups=groups))
+            if groups is True:
+                html.append(u'</optgroup>')
         else:
             html.append(self.render_option(default_value))
         return u''.join(html)
