@@ -4,12 +4,16 @@ Faceted.initializeTaxonomySelect2Widget = function(evt){
     wid = wid.split('_')[0];
     Faceted.Widgets[wid] = new Faceted.TaxonomySelectWidget(wid);
     var select = jQuery('#' + wid);
-    select.select2({
+    var parameters = {
       containerCssClass: 'faceted-select2-container',
       dropdownCssClass: 'faceted-select2',
-    });
-    console.log(select.width());
+    };
+    select.select2(parameters);
     jQuery('#s2id_' + wid).width(select.width() * 1.2);
+    // Bind events
+    jQuery(Faceted.Events).bind(Faceted.Events.QUERY_CHANGED, function(evt){
+      select.select2(parameters);
+    });
   });
 };
 
