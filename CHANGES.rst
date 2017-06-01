@@ -5,7 +5,12 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Display the title of the widget instead of the All option
+  [mpeeters]
+
+- Update the select2 widget if the faceted widget is updated
+  programmatically
+  [mpeeters]
 
 
 1.0a3 (2016-08-02)
