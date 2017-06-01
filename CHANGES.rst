@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a4 (unreleased)
+1.0a4 (2017-06-01)
 ------------------
 
 - Display the title of the widget instead of the All option
