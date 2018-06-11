@@ -3,6 +3,7 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:faceted="http://namespaces.zope.org/faceted"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.faceted.taxonomywidget">
 
   <!-- Select widget -->
@@ -21,7 +22,14 @@
     file="./static/select_edit.js"
    />
 
-  <faceted:widget factory=".widget.SelectWidget" />
+  <faceted:widget
+    zcml:condition="not-have plone-5"
+    factory=".widget.SelectWidget" />
+
+  <faceted:widget
+    zcml:condition="have plone-5"
+    factory=".widget.SelectWidget"
+    schema=".interfaces.ITaxonomySchema" />
 
   <!-- Select2 widget -->
   <browser:resource
@@ -39,6 +47,13 @@
     file="./static/select2_edit.js"
    />
 
-  <faceted:widget factory=".widget.Select2Widget" />
+  <faceted:widget
+    zcml:condition="not-have plone-5"
+    factory=".widget.Select2Widget" />
+
+  <faceted:widget
+    zcml:condition="have plone-5"
+    factory=".widget.Select2Widget"
+    schema=".interfaces.ITaxonomy2Schema" />
 
 </configure>

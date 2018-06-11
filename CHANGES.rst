@@ -5,7 +5,8 @@ Changelog
 1.0a5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Make package compatible with eea.facetednavigation 10.0+
+  [nicolas]
 
 
 1.0a4 (2017-06-01)

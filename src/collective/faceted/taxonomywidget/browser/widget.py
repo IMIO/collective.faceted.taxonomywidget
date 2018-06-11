@@ -12,21 +12,30 @@ from eea.facetednavigation.widgets.select import widget
 
 from collective.faceted.taxonomywidget import _
 
+from eea.facetednavigation.widgets.widget import Widget as AbstractWidget
+try:
+    AbstractWidget.edit_schema
+except AttributeError:
+    HAS_EEA10 = True
+else:
+    HAS_EEA10 = False
+
 
 class SelectWidget(widget.Widget):
     widget_type = 'taxonomy_select'
     widget_label = _('Taxonomy Select')
     index = ViewPageTemplateFile('select_widget.pt')
 
-    view_js = (
-        '++resource++eea.facetednavigation.widgets.select.view.js',
-        '++resource++collective.faceted.taxonomywidget.widgets.select.view.js',
-    )
-    edit_js = (
-        '++resource++eea.facetednavigation.widgets.select.edit.js',
-        '++resource++collective.faceted.taxonomywidget.widgets.select.edit.js',
-    )
-    view_css = '++resource++collective.faceted.taxonomywidget.widgets.select.view.css'
+    if not HAS_EEA10:
+        view_js = (
+            '++resource++eea.facetednavigation.widgets.select.view.js',
+            '++resource++collective.faceted.taxonomywidget.widgets.select.view.js',
+        )
+        edit_js = (
+            '++resource++eea.facetednavigation.widgets.select.edit.js',
+            '++resource++collective.faceted.taxonomywidget.widgets.select.edit.js',
+        )
+        view_css = '++resource++collective.faceted.taxonomywidget.widgets.select.view.css'
 
     def taxonomy(self):
         taxonomy = Taxonomy(default_value=self.default or '')
@@ -42,18 +51,19 @@ class Select2Widget(SelectWidget):
     widget_type = 'taxonomy_select2'
     widget_label = _('Taxonomy Select2')
 
-    view_js = (
-        '++resource++eea.facetednavigation.widgets.select.view.js',
-        '++resource++collective.faceted.taxonomywidget.widgets.select2.view.js',
-    )
-    edit_js = (
-        '++resource++eea.facetednavigation.widgets.select.edit.js',
-        '++resource++collective.faceted.taxonomywidget.widgets.select2.edit.js',
-    )
-    view_css = (
-        '++resource++collective.faceted.taxonomywidget.widgets.select.view.css',
-        '++resource++collective.faceted.taxonomywidget.widgets.select2.view.css',
-    )
+    if not HAS_EEA10:
+        view_js = (
+            '++resource++eea.facetednavigation.widgets.select.view.js',
+            '++resource++collective.faceted.taxonomywidget.widgets.select2.view.js',
+        )
+        edit_js = (
+            '++resource++eea.facetednavigation.widgets.select.edit.js',
+            '++resource++collective.faceted.taxonomywidget.widgets.select2.edit.js',
+        )
+        view_css = (
+            '++resource++collective.faceted.taxonomywidget.widgets.select.view.css',
+            '++resource++collective.faceted.taxonomywidget.widgets.select2.view.css',
+        )
 
     def taxonomy(self):
         taxonomy = Taxonomy(default_value=self.default or '', groups=True)
