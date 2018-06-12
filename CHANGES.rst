@@ -5,6 +5,9 @@ Changelog
 1.0a5 (unreleased)
 ------------------
 
+- Add a setup profile for Plone 5
+  [nicolas]
+
 - Make package compatible with eea.facetednavigation 10.0+
   [nicolas]
 
