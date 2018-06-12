@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a5 (unreleased)
+1.0a5 (2018-06-12)
 ------------------
 
 - Add a setup profile for Plone 5
