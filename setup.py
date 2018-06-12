@@ -19,7 +19,7 @@ long_description = (
 
 setup(
     name='collective.faceted.taxonomywidget',
-    version='1.0a5',
+    version='1.0a6.dev0',
     description="Faceted navigation taxonomy widget",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
