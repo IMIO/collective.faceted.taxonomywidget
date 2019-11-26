@@ -6,7 +6,7 @@
 collective.faceted.taxonomywidget
 ==============================================================================
 
-
+Permet la recherche par facettes via Taxonomy. 
 
 Translations
 ------------
