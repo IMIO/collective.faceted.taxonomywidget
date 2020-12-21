@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a6 (unreleased)
+1.0a6 (2020-12-21)
 ------------------
 
 - Upload to pypi.
