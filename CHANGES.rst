@@ -5,7 +5,8 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Upload to pypi.
+  [bsuttor]
 
 
 1.0a5 (2018-06-12)
